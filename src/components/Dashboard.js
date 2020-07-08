@@ -25,8 +25,8 @@ function Dashboard(props) {
           <button onClick={handleLogout}>Logout</button>
 
           <Switch>
-            <PRoute path="/profiles" component={GoogleMap} />
-            <PRoute path="/" component={Profiles} />
+            <PRoute path="/profiles" component={Profiles} />
+            <PRoute path="/" component={GoogleMap} />
           </Switch>
         </div>
     )
