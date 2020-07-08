@@ -2,6 +2,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+The backend of this react/redux project is located at https://github.com/dakotastates/ReactReduxProjectBackend
+
 In the project directory, you can run:
 
 ### `yarn start`
