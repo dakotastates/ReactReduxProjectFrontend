@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import { connect } from "react-redux";
 import { storeUser, updateUser, storeUsers } from "../actions/UserActions";
+import ProfileCard from './ProfileCard'
+//import { Card } from 'semantic-ui-react'
 
 const mapStyles = {
   width: '50%',
@@ -24,6 +26,10 @@ export class MapContainer extends Component {
   // }
 
   state={
+    showingInfoWindow: false,
+    activeMarker: {},
+    selectedPlace: {},
+    user:{},
     users:[]
   }
 
@@ -51,16 +57,33 @@ export class MapContainer extends Component {
       .catch((error) => console.log(error));
   }
 
+  onMarkerClick=(props, marker, e) =>{
+    console.log(props)
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true,
+      user: props.user
+
+    })
+
+
+  }
+
 displayMarkers = () =>{
   // debugger
   return this.state.users.map((user)=>{
-    return <Marker  position={{
+    return <Marker
+    position={{
       lat: user.latitude,
       lng: user.longitude
     }}
-    onClick={()=> console.log("clicked")} />
+    user={user}
+    onClick={this.onMarkerClick} />
   })
 }
+
+
 
 
   render() {
@@ -77,8 +100,15 @@ displayMarkers = () =>{
          lng: currentUser.longitude
         }}
       >
-      <Marker position={{ lat: currentUser.latitude, lng: currentUser.longitude}}  />
-      {this.displayMarkers()}
+        <Marker position={{ lat: currentUser.latitude, lng: currentUser.longitude}}  />
+        {this.displayMarkers()}
+
+        <InfoWindow
+          marker = { this.state.activeMarker }
+          visible = { this.state.showingInfoWindow }>
+        <h2> info window</h2>
+          <ProfileCard {...this.state.user}/>
+        </InfoWindow>
       </Map>
     );
   }
