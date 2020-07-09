@@ -6,8 +6,8 @@ import ProfileCard from './ProfileCard'
 //import { Card } from 'semantic-ui-react'
 
 const mapStyles = {
-  width: '50%',
-  height: '50%'
+  width: '100%',
+  height: '100%'
 };
 
 export class MapContainer extends Component {

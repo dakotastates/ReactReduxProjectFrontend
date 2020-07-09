@@ -67,7 +67,7 @@ class SignUp extends React.Component {
                         value="SignUp"
                     />
                 </form>
-
+                Already have an Account? <button onClick={()=>this.props.toggle(true)}>Login</button>
             </div>
         )
     }
