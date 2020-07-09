@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+//import {Link} from 'react-router-dom'
 
 
 export class MapMarker extends Component {

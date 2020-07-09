@@ -3,6 +3,7 @@ import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import { connect } from "react-redux";
 import { storeUser, updateUser, storeUsers } from "../actions/UserActions";
 import ProfileCard from './ProfileCard'
+import {BrowserRouter, Link} from 'react-router-dom'
 //import { Card } from 'semantic-ui-react'
 
 const mapStyles = {
@@ -66,7 +67,7 @@ export class MapContainer extends Component {
       user: props.user
 
     })
-
+// debugger
 
   }
 
@@ -88,7 +89,8 @@ displayMarkers = () =>{
 
   render() {
  const currentUser = this.props.user
-
+ const clickedUser = this.state.user
+ // debugger
     return (
 
       <Map
@@ -104,11 +106,15 @@ displayMarkers = () =>{
         {this.displayMarkers()}
 
         <InfoWindow
+
           marker = { this.state.activeMarker }
           visible = { this.state.showingInfoWindow }>
         <h2> info window</h2>
-          <ProfileCard {...this.state.user}/>
+        <BrowserRouter>
+          <ProfileCard key={clickedUser.id}{...clickedUser}/>
+        </BrowserRouter>
         </InfoWindow>
+
       </Map>
     );
   }

@@ -1,5 +1,5 @@
 export default function userReducers(
-  state = { user: {}, users: [], filterUsers: [] },
+  state = { user: {}, users: [], profile:{} },
   { type, payload }
 ) {
   switch (type) {
@@ -31,6 +31,13 @@ export default function userReducers(
         ...state,
         user: payload,
         users: [],
+      };
+
+      case "SHOW_USER":
+       // debugger
+      return {
+        ...state,
+        profile: payload
       };
 
     default:
