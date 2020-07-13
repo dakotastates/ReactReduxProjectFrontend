@@ -26,8 +26,9 @@ export const createUser = (state) => {
    return async (dispatch) => {
      const res = await fetch("http://localhost:3000/api/v1/users", configObj);
      const json = await res.json();
+     // debugger
      if (json.error) {
-        throw new Error(json.error + " " + json.message);
+        throw new Error(json.error /*+ " " + json.message*/);
       }
       localStorage.setItem("token", json.jwt);
       dispatch({
@@ -53,8 +54,9 @@ export const storeUser = (user) => {
   return async (dispatch) => {
     const res = await fetch("http://localhost:3000/api/v1/login", configObj);
     const json = await res.json();
+    // debugger
     if (json.error) {
-      throw new Error(json.error + " " + json.message);
+      throw new Error(json.error /*+ " " + json.message*/);
     }
     localStorage.setItem("token", json.jwt);
     dispatch({
