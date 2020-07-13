@@ -3,7 +3,7 @@ import ProfileCard from './ProfileCard'
 import { connect } from "react-redux";
 import { showUser } from "../actions/UserActions";
 import CommentForm from './CommentForm'
-
+import CommentShow from './CommentShow'
 
 
 class ProfileShow extends React.Component {
@@ -24,6 +24,8 @@ componentDidMount(){
   .catch((error) => console.log(error));
 }
 
+
+
     render(){
       console.log(this.state)
 
@@ -32,6 +34,7 @@ componentDidMount(){
             <div>
               <h1>Profile Show Page</h1>
               {this.state.profile.username ? <ProfileCard {...this.state.profile}/>:<h1>ID not Found</h1>}
+              <CommentShow {...this.state.profile}/>
               <CommentForm {...this.state.profile}/>
             </div>
 

@@ -37,26 +37,27 @@ export const createComment = (state) => {
    }
 };
 
-export const storeComment = (user) => {
+export const storeComment = (comment) => {
   const configObj = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
     },
-    body: JSON.stringify({user}),
+    body: JSON.stringify({comment}),
   };
 
   return async (dispatch) => {
-    const res = await fetch("http://localhost:3000/api/v1/login", configObj);
+    const res = await fetch("http://localhost:3000/api/v1/comments", configObj);
     const json = await res.json();
+    // debugger
     if (json.error) {
       throw new Error(json.error + " " + json.message);
     }
-    localStorage.setItem("token", json.jwt);
+    //localStorage.setItem("token", json.jwt);
     dispatch({
-       type: "STORAGE_USER",
-       payload: json.user,
+       type: "STORAGE_COMMENT",
+       payload: json.comment,
      });
   }
 };
@@ -74,11 +75,11 @@ export const storeComments = () => {
     const json = await res.json();
     // debugger
     if (json.error) {
-      // debugger
+      debugger
       throw new Error(json.error + " " + json.message);
     }
     dispatch({
-      type: "STORAGE_USERS",
+      type: "STORAGE_COMMENTS",
       payload: json,
     });
   };

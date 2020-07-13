@@ -1,17 +1,24 @@
 import React from 'react'
 import { connect } from "react-redux";
-import {  createComment } from "../actions/CommentActions";
+import {  createComment, storeComment } from "../actions/CommentActions";
 import {  storeUser } from "../actions/UserActions";
 //import { Button, Comment, Form, Header } from 'semantic-ui-react'
 
 
 class CommentForm extends React.Component {
-  state = {
+constructor(props){
+  super(props)
+  this.formRef=React.createRef()
+  this.state = {
     comment:"",
     user_id:[],
     recipient_id:[]
   }
+  //this.onSubmit = this.onSubmit.bind(this);
 
+  // this.HandleOnChange = this.HandleOnChange.bind(this);
+  //   this.onSubmit = this.onSubmit.bind(this);
+}
 
 
   handleOnChange = (e) => {
@@ -28,15 +35,34 @@ class CommentForm extends React.Component {
     e.preventDefault();
     this.props
        .createComment(this.state)
-       debugger
+       .then(() => {
+         //this.props.storeComment(this.state)
+        // debugger
+        //this.props.addComment(this.state)
+        this.setState({
+          comment:"",
+          user_id:"",
+          recipient_id:""
+
+       })
+        })
+
+       // debugger
+
   }
+
+
+  // componentDidUpdate(){
+  //   console.log(this.state)
+  // }
+
 
 
   render(){
     return(
-      <form onSubmit={this.onSubmit}>
+      <form onSubmit={this.onSubmit} ref={this.formRef}>
         <label for="comment">Comment:</label><br/><br/>
-        <textarea id="comment" name="comment" rows="4" cols="50" onChange={this.handleOnChange} />
+        <textarea id="comment" value={this.state.comment} name="comment" rows="4" cols="50" onChange={this.handleOnChange} />
         <br/>
         <input type="Submit" value="Comment"/>
         <br/>
@@ -117,7 +143,8 @@ class CommentForm extends React.Component {
 // )
 
 const mapStateToProps = (state) => ({
-  user: state.usersStore.user
+  user: state.usersStore.user,
+  comment: state.commentsStore.comment
 });
 
-export default connect(mapStateToProps, { storeUser, createComment })(CommentForm)
+export default connect(mapStateToProps, { storeUser, createComment, storeComment })(CommentForm)

@@ -5,7 +5,7 @@ export default function commentsReducers(
   switch (type) {
 
     case "STORAGE_COMMENT":
-    // debugger
+    debugger
     return {
       ...state,
       comment: payload,
@@ -16,6 +16,7 @@ export default function commentsReducers(
       return {
         ...state,
         comment: payload,
+        //comments:payload
       };
 
       case "STORAGE_COMMENTS":
@@ -23,9 +24,10 @@ export default function commentsReducers(
       return {
         ...state,
         comments: payload,
+
       };
 
-      
+
     default:
       return state;
   }
