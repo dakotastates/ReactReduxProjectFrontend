@@ -89,7 +89,7 @@ export const storeUsers = () => {
   };
 };
 
-export const updateUser = (state) => {
+export const updateUser = (state, user) => {
   // debugger
   // console.log(state)
   let options = {
@@ -103,12 +103,12 @@ export const updateUser = (state) => {
   };
 
   return async (dispatch) => {
-    const res = await fetch("http://localhost:3000/api/v1/users" + `/${state.id}`, options);
+    const res = await fetch("http://localhost:3000/api/v1/users" + `/${user.id}`, options);
 
     const json = await res.json();
     // debugger
-    if (json.error) {
-      throw new Error(json.error + " " + json.message);
+    if (json.errors) {
+      throw new Error(json.errors /*+ " " + json.message*/);
     }
     dispatch({
       type: "UPDATE_USER",

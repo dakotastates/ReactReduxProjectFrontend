@@ -26,7 +26,7 @@ function Dashboard(props) {
 
     return(
         <div>
-          <h1>Dashboard</h1>
+          <h1>Neighbr</h1>
           <div className="header">
           <Navbar />
             <div className="logout">
