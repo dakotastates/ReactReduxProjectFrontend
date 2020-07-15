@@ -19,6 +19,36 @@ toggleEdit=() =>{
   this.setState((prevState)=>({displayEdit:!prevState.displayEdit}))
 }
 
+  // updateLocation(longitude, latitude){
+  //   this.setState.location({
+  //     longitude: longitude,
+  //     latitude: latitude
+  //   })
+  // debugger
+  // }
+
+componentDidMount(){
+  // debugger
+  let currentComponent = this;
+  navigator.geolocation.getCurrentPosition(function(position) {
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+      //currentComponent.updateLocation(position.coords.longitude, position.coords.latitude)
+      currentComponent.setState({
+        longitude: position.coords.longitude,
+        latitude: position.coords.latitude
+      })
+      console.log(currentComponent.state)
+      currentComponent.props.updateUser(currentComponent.state, currentComponent.props.user)
+      //console.log(currentUser)
+      //currentComponent.setState(()=>{
+        //currentComponent.props.user.longitude = position.coords.longitude
+        //currentComponent.props.user.latitude = position.coords.latitude
+      //});
+      //currentComponent.props.updateUser(currentComponent.props.user)
+    });
+
+}
 
 
     render(){
@@ -30,7 +60,7 @@ toggleEdit=() =>{
 
               {this.state.displayEdit ? < EditProfile user={user} updateUser={updateUser}/> : <ProfileCard key={user.id}{...user}/>}
 
-              
+
 
               <button onClick={this.toggleEdit}>{this.state.displayEdit ? "Back to Profile" : "Edit Profile"}</button>
 

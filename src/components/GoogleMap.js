@@ -35,24 +35,24 @@ export class MapContainer extends Component {
   }
 
   componentDidMount(){
-    console.log(this.props);
-    let currentComponent = this;
-    navigator.geolocation.getCurrentPosition(function(position) {
-        console.log("Latitude is :", position.coords.latitude);
-        console.log("Longitude is :", position.coords.longitude);
-        //currentComponent.setState(()=>{
-          currentComponent.props.user.longitude = position.coords.longitude
-          currentComponent.props.user.latitude = position.coords.latitude
-        //});
-        currentComponent.props.updateUser(currentComponent.props.user)
-      });
+    // console.log(this.props);
+    // let currentComponent = this;
+    // navigator.geolocation.getCurrentPosition(function(position) {
+    //     console.log("Latitude is :", position.coords.latitude);
+    //     console.log("Longitude is :", position.coords.longitude);
+    //     //currentComponent.setState(()=>{
+    //       currentComponent.props.user.longitude = position.coords.longitude
+    //       currentComponent.props.user.latitude = position.coords.latitude
+    //     //});
+    //     currentComponent.props.updateUser(currentComponent.props.user)
+    //   });
 
       this.props
       .storeUsers()
       .then(() => {
-       console.log(this.props.users)
+       //console.log(this.props.users)
        this.setState({users: this.props.users})
-       console.log(this.state)
+       //console.log(this.state)
        // debugger
       })
       .catch((error) => console.log(error));
@@ -73,8 +73,9 @@ export class MapContainer extends Component {
 
 displayMarkers = () =>{
   // debugger
-  return this.state.users.map((user)=>{
+  return this.state.users.map((user, index)=>{
     return <Marker
+    key={index}
     position={{
       lat: user.latitude,
       lng: user.longitude
@@ -109,7 +110,7 @@ displayMarkers = () =>{
 
           marker = { this.state.activeMarker }
           visible = { this.state.showingInfoWindow }>
-        <h2> info window</h2>
+
         <BrowserRouter>
           <ProfileCard key={clickedUser.id}{...clickedUser}/>
         </BrowserRouter>

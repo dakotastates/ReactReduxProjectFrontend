@@ -68,7 +68,7 @@ class CommentForm extends Component {
 
         <textarea id="comment" value={this.state.comment} name="comment" rows="4" cols="50" onChange={this.handleOnChange} />
         <br/>
-        <input type="Submit" value="Comment"/>
+        <input type="Submit" defaultValue="Comment"/>
         <br/>
       </form>
     )

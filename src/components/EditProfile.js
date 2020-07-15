@@ -23,11 +23,12 @@ class EditProfile extends React.Component {
     console.log(this.state)
     // debugger
     this.props.updateUser(this.state, this.props.user)
-    
+
 
   };
 
   render(){
+    // debugger
     return(
       <div>
       <h1>Edit your Profile</h1>
