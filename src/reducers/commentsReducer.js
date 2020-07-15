@@ -15,8 +15,8 @@ export default function commentsReducers(
     // debugger
       return {
         ...state,
-        comment: payload,
-        //comments:payload
+        comments: [...state.comments, payload],
+        // comments:payload
       };
 
       case "STORAGE_COMMENTS":

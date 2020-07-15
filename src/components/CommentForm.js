@@ -1,24 +1,28 @@
-import React from 'react'
-import { connect } from "react-redux";
-import {  createComment, storeComment } from "../actions/CommentActions";
-import {  storeUser } from "../actions/UserActions";
+import React, {Component} from 'react'
+//import { connect } from "react-redux";
+//import {  createComment, storeComment } from "../actions/CommentActions";
+//import {  storeUser } from "../actions/UserActions";
 //import { Button, Comment, Form, Header } from 'semantic-ui-react'
 
 
-class CommentForm extends React.Component {
-constructor(props){
-  super(props)
-  this.formRef=React.createRef()
-  this.state = {
-    comment:"",
-    user_id:[],
-    recipient_id:[]
+
+class CommentForm extends Component {
+//constructor(props){
+  //super(props)
+  //this.formRef=React.createRef()
+  constructor(props){
+    super(props);
+    this.state = {
+      comment:"",
+      user_id:[],
+      recipient_id:[]
   }
+}
   //this.onSubmit = this.onSubmit.bind(this);
 
   // this.HandleOnChange = this.HandleOnChange.bind(this);
   //   this.onSubmit = this.onSubmit.bind(this);
-}
+//}
 
 
   handleOnChange = (e) => {
@@ -26,16 +30,17 @@ constructor(props){
     this.setState({
       [e.target.name]: e.target.value,
       user_id: this.props.user.id,
-      recipient_id: this.props.id
+      recipient_id: parseInt(this.props.profile)
     });
   };
 
-  onSubmit = (e) => {
+  onSubmit = (event) => {
     // debugger
-    e.preventDefault();
+    event.preventDefault();
     this.props
-       .createComment(this.state)
-       .then(() => {
+
+       .createComment(this.state);
+       //.then(() => {
          //this.props.storeComment(this.state)
         // debugger
         //this.props.addComment(this.state)
@@ -45,23 +50,22 @@ constructor(props){
           recipient_id:""
 
        })
-        })
+      //  })
 
        // debugger
 
   }
 
 
-  // componentDidUpdate(){
-  //   console.log(this.state)
-  // }
+
 
 
 
   render(){
+    // debugger
     return(
-      <form onSubmit={this.onSubmit} ref={this.formRef}>
-        <label for="comment">Comment:</label><br/><br/>
+      <form onSubmit={(event) => this.onSubmit(event)}>
+
         <textarea id="comment" value={this.state.comment} name="comment" rows="4" cols="50" onChange={this.handleOnChange} />
         <br/>
         <input type="Submit" value="Comment"/>
@@ -142,9 +146,12 @@ constructor(props){
 //   </Comment.Group>
 // )
 
-const mapStateToProps = (state) => ({
-  user: state.usersStore.user,
-  comment: state.commentsStore.comment
-});
 
-export default connect(mapStateToProps, { storeUser, createComment, storeComment })(CommentForm)
+
+// const mapStateToProps = (state) => ({
+//   user: state.usersStore.user,
+//   comment: state.commentsStore.comment
+// });
+
+//export default connect(mapStateToProps, { storeUser, createComment, storeComment })(CommentForm)
+export default CommentForm;

@@ -31,7 +31,7 @@ export const createComment = (state) => {
       //localStorage.setItem("token", json.jwt);
       dispatch({
         type: "CREATE_COMMENT",
-        payload: json.user,
+        payload: json.comment,
       });
       // debugger
    }

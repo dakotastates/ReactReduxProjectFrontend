@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import ProfileCard from './ProfileCard'
 import { connect } from "react-redux";
 import { showUser } from "../actions/UserActions";
-import CommentForm from './CommentForm'
-import CommentShow from './CommentShow'
+//import CommentForm from './CommentForm'
+//import CommentShow from './CommentShow'
+import CommentsContainer from '../containers/CommentsContainer'
 
 
 class ProfileShow extends React.Component {
@@ -34,8 +35,8 @@ componentDidMount(){
             <div>
               <h1>Profile Show Page</h1>
               {this.state.profile.username ? <ProfileCard {...this.state.profile}/>:<h1>ID not Found</h1>}
-              <CommentShow {...this.state.profile}/>
-              <CommentForm {...this.state.profile}/>
+
+              <CommentsContainer profile={this.props.match.params.id}/>
             </div>
 
         )

@@ -5,10 +5,12 @@ class Comment extends React.Component {
 
 
     render(){
-      const {id, comment, user} = this.props
+      const {id, comment, user_id, user} = this.props
+
+      // debugger
         return(
             <div>
-            {user} says: {comment}
+            {user.username} says: {comment}
             </div>
         )
     }

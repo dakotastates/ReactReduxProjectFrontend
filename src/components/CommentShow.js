@@ -1,32 +1,36 @@
 import React from 'react'
-import { connect } from "react-redux";
-import {  storeComments } from "../actions/CommentActions";
-import {  storeUser } from "../actions/UserActions";
+//import { connect } from "react-redux";
+//import {  storeComments } from "../actions/CommentActions";
+//import {  storeUser } from "../actions/UserActions";
 import Comment from './Comment'
 //import { Button, Comment, Form, Header } from 'semantic-ui-react'
-import CommentForm from './CommentForm'
+//import CommentForm from './CommentForm'
+import { useParams} from "react-router";
 
 
-class CommentShow extends React.Component {
+//class CommentShow extends React.Component {
+const CommentShow = props => {
 
-  state={
-    comments:[]
-  }
+  // state={
+  //   comments:[]
+  // }
 
-  componentDidUpdate() {
+  // componentDidMount() {
+  //
+  //    this.props
+  //      .storeComments()
+  //      .then(() => {
+  //       console.log(this.props.comments)
+  //       // debugger
+  //       this.setState({comments: this.props.comments})
+  //       console.log(this.state)
+  //
+  //      })
+  //      .catch((error) => console.log(error));
+  //
+  //  }
 
-     this.props
-       .storeComments()
-       .then(() => {
-        console.log(this.props.comments)
-        // debugger
-        this.setState({comments: this.props.comments})
-        console.log(this.state)
 
-       })
-       .catch((error) => console.log(error));
-
-   }
 
    // addComment = (comment)=>{
    //   this.setState((prevState)=>{
@@ -37,7 +41,7 @@ class CommentShow extends React.Component {
    // }
 
 // componentDidUpdate(){
-//   this.state()
+//   console.log(this.props.comments)
 // }
 
    // filter=()=>{
@@ -47,8 +51,12 @@ class CommentShow extends React.Component {
    // }
 
 
-  render(){
-    const filteredUser = this.state.comments.filter(comment => comment.recipient_id === this.props.id)
+  //render(){
+    //const filteredUser = this.state.comments.filter(comment => comment.recipient_id === this.props.id)
+    let { id } = useParams();
+// debugger
+    const filteredUser = props.comments.filter(comment => comment.recipient_id === parseInt(id))
+    // debugger
     console.log(filteredUser)
     return(
       <div>
@@ -61,12 +69,13 @@ class CommentShow extends React.Component {
 
 
     )
-  }
+//  }
 }
 
 
-const mapStateToProps = (state) => ({
-  comments: state.commentsStore.comments
-});
+// const mapStateToProps = (state) => ({
+//   comments: state.commentsStore.comments
+// });
 
-export default connect(mapStateToProps, { storeComments })(CommentShow)
+//export default connect(mapStateToProps, { storeComments })(CommentShow)
+export default CommentShow;
